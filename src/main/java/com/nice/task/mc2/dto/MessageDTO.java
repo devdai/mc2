@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class MessageDTO implements Serializable {
     private int id;
-    private int sessionId;
+    private long sessionId;
     private Date MC1_timestamp;
     private Date MC2_timestamp;
     private Date MC3_timestamp;
@@ -17,7 +17,7 @@ public class MessageDTO implements Serializable {
     public MessageDTO() {
     }
 
-    public MessageDTO(int sessionId, Date MC1_timestamp, Date MC2_timestamp, Date MC3_timestamp, Date end_timestamp) {
+    public MessageDTO(long sessionId, Date MC1_timestamp, Date MC2_timestamp, Date MC3_timestamp, Date end_timestamp) {
         this.sessionId = sessionId;
         this.MC1_timestamp = MC1_timestamp;
         this.MC2_timestamp = MC2_timestamp;
