@@ -1,6 +1,8 @@
 package com.nice.task.mc2;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nice.task.mc2.dto.MessageDTO;
+import lombok.SneakyThrows;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
@@ -45,11 +47,12 @@ public class CustomStompSessionHandler extends StompSessionHandlerAdapter {
              * @param headers headers
              * @param payload message payload
              */
+            @SneakyThrows
             @Override
             public void handleFrame(StompHeaders headers, Object payload) {
                 MessageDTO message = (MessageDTO) payload;
                 message.setMC2_timestamp(Date.from(Instant.now()));
-                kafkaTemplate.send(Constants.KAFKA_TOPIC, message.toString());
+                kafkaTemplate.send(Constants.KAFKA_TOPIC, new ObjectMapper().writeValueAsString(message));
             }
         });
     }
