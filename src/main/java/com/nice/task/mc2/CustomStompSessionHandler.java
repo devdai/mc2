@@ -29,6 +29,7 @@ public class CustomStompSessionHandler extends StompSessionHandlerAdapter {
      */
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
+        System.out.println("connected");
         session.subscribe("/topic/MC2", new StompFrameHandler() {
             /**
              * Set payload type to our MessageDTO.class regardless of headers
@@ -52,6 +53,7 @@ public class CustomStompSessionHandler extends StompSessionHandlerAdapter {
             public void handleFrame(StompHeaders headers, Object payload) {
                 MessageDTO message = (MessageDTO) payload;
                 message.setMC2_timestamp(Date.from(Instant.now()));
+                System.out.println("got frame");
                 kafkaTemplate.send(Constants.KAFKA_TOPIC, new ObjectMapper().writeValueAsString(message));
             }
         });

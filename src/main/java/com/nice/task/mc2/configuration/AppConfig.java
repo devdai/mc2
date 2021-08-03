@@ -27,8 +27,8 @@ import java.util.Map;
 public class AppConfig {
 
     //todo break down into separate variables: HOST, PORT, URI etc. And put them in application.properties
-    private static final String BOOTSTRAP_ADDRESS = "localhost:29092";
-    private static final String WEB_SOCKET_URL = "ws://localhost:8081/message";
+    private static final String BOOTSTRAP_ADDRESS = "kafka:29092";
+    private static final String WEB_SOCKET_URL = "ws://mc1:8080/mc1/message";
 
     /**
      * Kafka bootstrap address config
